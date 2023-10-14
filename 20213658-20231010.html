@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-    <h1 id = "标题">2013东西方2马的交锋</h1>
+    <h1 id = "title">2013东西方2马的交锋</h1>
     <div>
     <video id = "myVideo" controls></video><br/>
         <button id = "play">Play</button>
@@ -44,14 +44,7 @@
           "上瘾.mp4",
           "世界冠军江西弃婴.mp4"
         ];
-    //视屏数组对象的控制变量
-    var i = 0;
-    //获取视频元素
-    var video = document.getElementById("myVideo");
-    video.src ="../videoMP4/"+myVideos[0];
-
-    var biao = document.getElementById("标题");
-    var biaos=[
+    var titles=[
           "2013东西方2马的交锋",
           "农民吹牛",
           "funDogs",
@@ -59,6 +52,14 @@
           "上瘾",
           "世界冠军江西弃婴"
     ]
+    //视屏数组对象的控制变量
+    var i = 0;
+    //获取视频元素
+    var video = document.getElementById("myVideo");
+    video.src ="../videoMP4/"+myVideos[0];
+
+    var title = document.getElementById("title");
+   
     //播放按钮
     document.getElementById("play").onclick = function () {
         video.play();
@@ -73,8 +74,9 @@
         if(i==myVideos.length){
             i=0;
         }
-        biao = biaos[i];
+        
         video.src ="../videoMP4/"+myVideos[i];
+        title.innerHTML = titles[i];
 
     };
  
