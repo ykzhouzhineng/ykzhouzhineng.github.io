@@ -100,11 +100,11 @@
     function goToPage() {
         // 获取用户输入的页码
         var pageNumber = document.getElementById("pageNumber").value;
-        if(pagenummber>6){
-            
+        if(pageNumber>6){
+            video.src = "videoMO4/"+myVideos[(pageNumber-1)%6];
+            video.play();
         }
-        //video.src = "../videoMP4/"+myVideos[(pageNumber-1)%6];
-        //video.play();
+        
     }     
 </script>
 </html>
