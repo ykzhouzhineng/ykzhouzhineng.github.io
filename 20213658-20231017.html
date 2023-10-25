@@ -36,7 +36,7 @@
         Time:<input type="text" value="0" id="currentTime"><br/>
         <!-- 输入框和按钮 -->
         <input type="number" id="pageNumber" placeholder="请输入页码">
-        <button onclick="goToPage()">跳转</button>
+        <button id = "goToPage">跳转</button>
 
     </div>
 </body>
@@ -59,7 +59,7 @@
           "逗八哥狗",
           "上瘾",
           "世界冠军江西弃婴"
-    ]
+    ];
     //视屏数组对象的控制变量
     var i = 0;
     //获取视频元素
@@ -97,14 +97,11 @@
     //currentTimeDom.value = 500;
     
     
-    function goToPage() {
+    document.getElementById("goToPage").onclick = function() {
         // 获取用户输入的页码
         var pageNumber = document.getElementById("pageNumber").value;
-        if(pageNumber>6){
-            video.src = "videoMP4/"+myVideos[(pageNumber-1)%6];
-            video.play();
-        }
-        
+        video.src = "videoMP4/"+myVideos[(pageNumber-1)%6];
+        video.play();
     }     
 </script>
 </html>
