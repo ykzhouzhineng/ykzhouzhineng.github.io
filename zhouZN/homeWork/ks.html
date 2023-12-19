@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放器</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            font-size: 14px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #409eff;
+            border-color: #409eff;
+            border: 1px solid #409eff;
+            padding: 12px 20px;
+            line-height: 1;
+            border-radius: 4px;
+            text-align: center;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #4481bd;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .content{
+            display: flex;
+            width: 50%;
+            height: 50%;
+            flex-direction: column;
+        }
+        .x,.y{
+            display: flex;
+            align-items: center;    
+            justify-items: center;    
+            justify-content: center;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div id="logo"></div>
+            <div id="time"></div>
+            <div class="x" id="stage">
+                <audio controls src="mp3/cs1.mp3" id="myAudio"></audio>
+                <video src="mp4/上瘾.mp4" controls id="myVideo"></video>
+            </div>
+
+            <div class="y" >
+                <button id="play">播放</button>
+                <button id="pre">上一个</button>
+                <button id="pause">暂停</button>
+                <button id="next">下一个</button>
+                <button id="switch">视频</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    var Model = {
+        i: 0,
+        isVideo: true,
+        UI: {
+            stageDom: document.getElementById("stage"),
+            videoDom: document.getElementById("myVideo"),
+            timeDom: document.getElementById("time"),
+            audioDom: document.getElementById("myAudio"),
+            logoDom: document.getElementById("logo"),
+            //下面是按钮
+            playDom: document.getElementById("play"),
+            pauseDom: document.getElementById("pause"),
+            prevDom: document.getElementById("prev"),
+            nextDom: document.getElementById("next"),
+            switchDom: document.getElementById("switch"),
+        }
+    }
+    //     play: function () {
+    //         Model.isVideo ? Model.UI.videoDom.play() : Model.UI.audioDom.play();
+    //         Model.mediaInfo();
+    //         Model.timeInfo();
+    //     },
+    //     pauser: function () {
+    //         Model.isVideo ? Model.UI.videoDom.play() : Model.UI.audioDom.play();
+    //     },
+    //     prev: function () {
+    //         Model.i--;
+    //         let i = Model.i;
+    //         Model.loadMedia();
+    //         Model.play();
+    //     },
+    //     next: function () {
+    //         Model.i++;
+    //         let i = Model.i;
+    //         Model.loadMedia();
+    //         Model.play();
+
+    //     },
+    //     mediaInfo: function () {
+    //         let mediaNum = Model.isVideo ? mediaData.videoFileNames.length : mediaData.podFileStruct.length;
+    //         Model.UI.logoDom.textContent = 'NO.' + (Model.i + 1) + '/' + mediaNum;
+    //     },
+    //     timeInfo: function () {
+    //         let mediaTime = Model.isVideo ? Model.UI.videoDom.duration : Model.UI.audioDom.duration;
+    //         mediaTime = parseInt(mediaTime);
+    //         let currentTime = Model.isVideo ? Model.UI.videoDom.currentTime : Model.UI.audioDom.currentTime;
+    //         currentTime = parseInt(currentTime);
+    //         Model.UI.timeDom.textContent = currentTime + ' s' + '/' + mediaTime + ' s';
+    //     },
+
+    //     loadMedia: function () {
+    //         let i = Model.i;
+    //         if (Model.isVideo) {
+    //             Model.UI.videoDom.src = mediaData.videoPath + mediaData.videoFileNames[i];
+    //         } else {
+    //             Model.UI.audioDom.src = mediaData.podPath + mediaData.podFileStruct[i].fileName;
+    //         }
+    //     },
+
+    //     init: function () {
+    //         //视频UI全屏设置
+    //         let browserWidth = document.body.clientWidth;
+    //         Model.UI.videoDom.style.width = browserWidth + 'px';
+    //         Model.UI.stageDom.style.width = browserWidth + 'px';
+    //         Model.UI.stageDom.style.height = Model.UI.videoDom.clientHeight + 'px';
+    //         //预读媒体文件
+    //         Model.loadMedia(0);
+    //         //初始化UI的控件的onclick属性
+    //         //下面是异步执行的代码
+    //         Model.UI.playDom.onclick = function () {
+    //             Model.play();
+    //         };
+    //         Model.UI.pauseDom.onclick = function () {
+    //             Model.pause();
+    //         };
+    //         Model.UI.prevDom.onclick = function () {
+    //             Model.prev();
+    //         };
+    //         Model.UI.nextDom.onclick = function () {
+    //             Model.next();
+    //         };
+    //         Model.UI.switchDom.onclick = function () {
+    //             Model.isVideo = !Model.isVideo;
+    //             Model.UI.switchDom.textContent = Model.isVideo ? "视 频" : "音 频 ";
+    //             if (!Model.isVideo) {
+    //                 Model.UI.stageDom.removeChild(Model.UI.videoDom);
+    //             } else {
+    //                 Model.UI.stageDom.appendChild(Model.UI.videoDom);
+    //             }
+
+    //         };
+
+    //     }//init 结束 ,
+    // }; //Model 结束
+    // Model.init();
+    function toggleMedia() {
+        if (Model.isVideo) {
+            // 显示视频，隐藏音频
+            Model.UI.videoDom.style.display = "block";
+            Model.UI.audioDom.style.display = "none";
+        }
+        else {
+            // 显示音频，隐藏视频
+            Model.UI.videoDom.style.display = "none";
+            Model.UI.audioDom.style.display = "block";
+        }
+    }
+    // 初始化时执行一次
+    toggleMedia();
+
+    // 监听 isvideo 的变化，并在变化时调用 toggleMedia 函数
+    function onIsVideoChange() {
+        toggleMedia();
+    }
+
+    Model.UI.switchDom.onclick = function () {
+        Model.isVideo = !Model.isVideo;
+        Model.UI.switchDom.textContent = Model.isVideo ? "视 频" : "音 频 ";
+        onIsVideoChange();
+    }
+
+
+
+
+
+</script>

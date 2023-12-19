@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaWebHomework5</title>
+    <style>
+        button {
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0 5px;
+        }
+        div{
+            text-align: center;
+            margin: auto;
+        }
+        h1{
+            text-align: center;
+            background-color: rgb(41, 186, 199);
+        }
+    </style>
+</head>
+<body>
+    <h1 id = "title">2013东西方2马的交锋</h1>
+    <div>
+    <video id = "myVideo" controls></video><br/>
+        <button id = "play">Play</button>
+        <button id = "pause">Pause</button>
+        <button id = "next">Next</button>
+    </div>
+</body>
+<script>
+    //视频数组对象
+    var myVideos = [
+          "2013东西方2马的交锋.mp4",
+          "农民吹牛.mp4",
+          "funDogs.mp4",
+          "逗八哥狗.mp4",
+          "上瘾.mp4",
+          "世界冠军江西弃婴.mp4"
+        ];
+    var titles=[
+          "2013东西方2马的交锋",
+          "农民吹牛",
+          "funDogs",
+          "逗八哥狗",
+          "上瘾",
+          "世界冠军江西弃婴"
+    ]
+    //视屏数组对象的控制变量
+    var i = 0;
+    //获取视频元素
+    var video = document.getElementById("myVideo");
+    video.src ="../videoMP4/"+myVideos[0];
+
+    var title = document.getElementById("title");
+   
+    //播放按钮
+    document.getElementById("play").onclick = function () {
+        video.play();
+    };
+    //暂停按钮
+    document.getElementById("pause").onclick = function () {
+        video.pause();
+    };
+    //跳转到下一条视频
+    document.getElementById("next").onclick = function () {
+        i++;
+        if(i==myVideos.length){
+            i=0;
+        }
+        
+        video.src ="../videoMP4/"+myVideos[i];
+        title.innerHTML = titles[i];
+
+    };
+ 
+</script>
+</html>
